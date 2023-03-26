@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorldController {
 
     @GetMapping("/HelloWorld")
-    public String saluda(@RequestParam(defaultValue = "UNKNOW") String name){//Definimos que si es llamado con la recepción de un nombre lo recibirá, de no ser así name = UNKNOW
+    public String saluda(@RequestParam(defaultValue = "UNKNOWN")  String name){//Definimos que si es llamado con la recepción de un nombre lo recibirá, de no ser así name = UNKNOW
         return "Hello, " + name + ". You are running a Maven project";
     }
 
@@ -18,6 +18,9 @@ public class HelloWorldController {
 
     @GetMapping(value = {"/HelloWorld2","/HelloWorld2/{name}"})
     public String Saluda2(@PathVariable(required = false)String name){
+        if(name == null) {
+            name = "UNKNOWN";
+        }
         return "Hello, " + name + ". You are running a Maven project";
     }
 }
